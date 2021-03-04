@@ -1,7 +1,10 @@
 package problem;
 
 import javax.media.opengl.GL2;
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -131,8 +134,10 @@ public class Problem {
      * @param gl переменная OpenGL для рисования
      */
     public void render(GL2 gl) {
-        for (Point point : points) {
-            point.render(gl);
-        }
+        //       for (Point point : points) {
+        //           point.render(gl);
+        //       }
+        //   }
+        Figure.renderCircle(gl,new Vector2(0.1,0.2),0.3,false);
     }
 }
