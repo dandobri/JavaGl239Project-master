@@ -10,6 +10,8 @@ public class Figure {
       gl.glVertex2d(pos.x,pos.y);
       gl.glEnd();
   }
+
+
   public static void renderLine(GL2 gl,Vector2 posA,Vector2 posB,double width){
       gl.glLineWidth((float) width);
       gl.glBegin(GL2.GL_LINES);
