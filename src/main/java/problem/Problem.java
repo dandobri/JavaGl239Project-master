@@ -117,9 +117,9 @@ public class Problem {
     public void addRandomPoints(int n) {
         for (int i = 0; i < n; i++) {
             Point p = Point.getRandomPoint();
-            points.add(p);
+           points.add(p);
         }
-    }
+   }
 
     /**
      * Очистить задачу
@@ -134,10 +134,10 @@ public class Problem {
      * @param gl переменная OpenGL для рисования
      */
     public void render(GL2 gl) {
-        //       for (Point point : points) {
-        //           point.render(gl);
-        //       }
-        //   }
-        Figure.renderCircle(gl,new Vector2(0.1,0.2),0.3,false);
+//               for (Point point : points) {
+//                   point.render(gl);
+//              }
+         }
+
     }
-}
+
