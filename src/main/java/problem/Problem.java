@@ -33,23 +33,25 @@ public class Problem {
      * список точек
      */
     private ArrayList<Point> points;
+    private ArrayList<Triangle> triangles;
+
 
     /**
      * Конструктор класса задачи
      */
     public Problem() {
         points = new ArrayList<>();
+        triangles = new ArrayList<>();
     }
 
     /**
      * Добавить точку
      *
-     * @param x      координата X точки
-     * @param y      координата Y точки
-     * @param setVal номер множества
+     * @param x координата X точки
+     * @param y координата Y точки
      */
-    public void addPoint(double x, double y, int setVal) {
-        Point point = new Point(x, y, setVal);
+    public void addPoint(double x, double y) {
+        Point point = new Point(x, y);
         points.add(point);
     }
 
@@ -57,15 +59,21 @@ public class Problem {
      * Решить задачу
      */
     public void solve() {
+        triangles.clear();
         // перебираем пары точек
         for (Point p : points) {
             for (Point p2 : points) {
-                // если точки являются разными
-                if (p != p2) {
-                    // если координаты у них совпадают
-                    if (Math.abs(p.x - p2.x) < 0.0001 && Math.abs(p.y - p2.y) < 0.0001) {
-                        p.isSolution = true;
-                        p2.isSolution = true;
+                for (Point p3 : points) {
+                    Triangle t = new Triangle(p, p2, p3);
+                    if (t.regular())
+                        triangles.add(t);
+                    // если точки являются разными
+                    if (p != p2) {
+                        // если координаты у них совпадают
+                        if (Math.abs(p.x - p2.x) < 0.0001 && Math.abs(p.y - p2.y) < 0.0001) {
+                            p.isSolution = true;
+                            p2.isSolution = true;
+                        }
                     }
                 }
             }
@@ -84,9 +92,8 @@ public class Problem {
             while (sc.hasNextLine()) {
                 double x = sc.nextDouble();
                 double y = sc.nextDouble();
-                int setVal = sc.nextInt();
                 sc.nextLine();
-                Point point = new Point(x, y, setVal);
+                Point point = new Point(x, y);
                 points.add(point);
             }
         } catch (Exception ex) {
@@ -101,7 +108,7 @@ public class Problem {
         try {
             PrintWriter out = new PrintWriter(new FileWriter(FILE_NAME));
             for (Point point : points) {
-                out.printf("%.2f %.2f %d\n", point.x, point.y, point.setNumber);
+                out.printf("%.2f %.2f %d\n", point.x, point.y);
             }
             out.close();
         } catch (IOException ex) {
@@ -117,15 +124,16 @@ public class Problem {
     public void addRandomPoints(int n) {
         for (int i = 0; i < n; i++) {
             Point p = Point.getRandomPoint();
-           points.add(p);
+            points.add(p);
         }
-   }
+    }
 
     /**
      * Очистить задачу
      */
     public void clear() {
         points.clear();
+        triangles.clear();
     }
 
     /**
@@ -134,10 +142,13 @@ public class Problem {
      * @param gl переменная OpenGL для рисования
      */
     public void render(GL2 gl) {
-//               for (Point point : points) {
-//                   point.render(gl);
-//              }
-         }
-
+        for (Point point : points) {
+            point.render(gl);
+        }
+        for (Triangle triangle : triangles) {
+            triangle.render(gl);
+        }
     }
+
+}
 
