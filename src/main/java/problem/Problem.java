@@ -65,8 +65,10 @@ public class Problem {
             for (Point p2 : points) {
                 for (Point p3 : points) {
                     Triangle t = new Triangle(p, p2, p3);
-                    if (t.regular())
+                    if (t.regular()) {
+                        System.out.println("find");
                         triangles.add(t);
+                    }
                     // если точки являются разными
                     if (p != p2) {
                         // если координаты у них совпадают
@@ -108,7 +110,7 @@ public class Problem {
         try {
             PrintWriter out = new PrintWriter(new FileWriter(FILE_NAME));
             for (Point point : points) {
-                out.printf("%.2f %.2f %d\n", point.x, point.y);
+                out.printf("%.2f %.2f\n", point.x, point.y);
             }
             out.close();
         } catch (IOException ex) {
