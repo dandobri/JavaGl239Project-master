@@ -34,7 +34,7 @@ public class Problem {
      */
     private ArrayList<Point> points;
     private ArrayList<Triangle> triangles;
-
+    private ArrayList<Triangle> resulttriangle;
 
     /**
      * Конструктор класса задачи
@@ -61,12 +61,14 @@ public class Problem {
     public void solve() {
         triangles.clear();
         // перебираем пары точек
+        int l=0;
         for (Point p : points) {
             for (Point p2 : points) {
                 for (Point p3 : points) {
                     Triangle t = new Triangle(p, p2, p3);
                     if (t.regular()) {
-                        System.out.println("find");
+                        resulttriangles();
+                        l++;
                         triangles.add(t);
                     }
                     // если точки являются разными
@@ -80,6 +82,7 @@ public class Problem {
                 }
             }
         }
+        System.out.println(l);
     }
 
     /**
