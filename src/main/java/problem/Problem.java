@@ -16,13 +16,13 @@ public class Problem {
      * текст задачи
      */
     public static final String PROBLEM_TEXT = "ПОСТАНОВКА ЗАДАЧИ:\n" +
-            "Заданы два множества точек в пространстве.\n" +
-            "Требуется построить пересечения и разность этих множеств";
+            "Задано множество точек в пространстве\n" +
+            "Требуется проверить,является ли это множество дважды треугольным";
 
     /**
      * заголовок окна
      */
-    public static final String PROBLEM_CAPTION = "Итоговый проект ученика 10-7 Иванова Ивана";
+    public static final String PROBLEM_CAPTION = "Итоговый проект ученика 10-1 Добриса Даниила";
 
     /**
      * путь к файлу
@@ -34,7 +34,7 @@ public class Problem {
      */
     private ArrayList<Point> points;
     private ArrayList<Triangle> triangles;
-    private ArrayList<Triangle> resulttriangle;
+
 
     /**
      * Конструктор класса задачи
@@ -62,12 +62,14 @@ public class Problem {
         triangles.clear();
         // перебираем пары точек
         int l=0;
-        for (Point p : points) {
-            for (Point p2 : points) {
-                for (Point p3 : points) {
+        for (int i = 0; i < points.size(); i++) {
+            Point p = points.get(i);
+            for (int j=i+1;j<points.size();j++) {
+                Point p2=points.get(j);
+                for (int k=j+1;k<points.size();k++) {
+                    Point p3=points.get(k);
                     Triangle t = new Triangle(p, p2, p3);
                     if (t.regular()) {
-                        resulttriangles();
                         l++;
                         triangles.add(t);
                     }
