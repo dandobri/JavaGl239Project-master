@@ -79,7 +79,7 @@ public class Problem {
                 }
             }
             if (a / 2 < 2) {
-                flg = false;
+                flg = false ;
             }
             System.out.println(a / 2);
             a = 0;
