@@ -60,31 +60,31 @@ public class Problem {
      */
     public void solve() {
         triangles.clear();
+        boolean flg = true;
+        int a = 0;
         // перебираем пары точек
-        int l=0;
         for (int i = 0; i < points.size(); i++) {
             Point p = points.get(i);
-            for (int j=i+1;j<points.size();j++) {
-                Point p2=points.get(j);
-                for (int k=j+1;k<points.size();k++) {
-                    Point p3=points.get(k);
+            for (int j = 0; j < points.size(); j++) {
+                Point p2 = points.get(j);
+                for (int k = 0; k < points.size(); k++) {
+                    if (i == j || j == k || k == i)
+                        continue;
+                    Point p3 = points.get(k);
                     Triangle t = new Triangle(p, p2, p3);
                     if (t.regular()) {
-                        l++;
                         triangles.add(t);
-                    }
-                    // если точки являются разными
-                    if (p != p2) {
-                        // если координаты у них совпадают
-                        if (Math.abs(p.x - p2.x) < 0.0001 && Math.abs(p.y - p2.y) < 0.0001) {
-                            p.isSolution = true;
-                            p2.isSolution = true;
-                        }
+                        a++;
                     }
                 }
             }
+            if (a / 2 < 2) {
+                flg = false;
+            }
+            System.out.println(a / 2);
+            a = 0;
         }
-        System.out.println(l);
+        System.out.println(flg);
     }
 
     /**
