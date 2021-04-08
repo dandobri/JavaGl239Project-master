@@ -81,7 +81,7 @@ public class Problem {
             if (a / 2 < 2) {
                 flg = false ;
             }
-            System.out.println(a / 2);
+            System.out.println(a / 2 );
             a = 0;
         }
         System.out.println(flg);
